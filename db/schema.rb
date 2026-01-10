@@ -10,5 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 0) do
+ActiveRecord::Schema[8.1].define(version: 2026_01_10_114048) do
+  create_table "beverages", charset: "utf8mb4", force: :cascade do |t|
+    t.integer "caffeine_mg", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.string "name", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_beverages_on_name", unique: true
+  end
+
+  create_table "caffeine_intakes", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "beverage_id", null: false
+    t.datetime "consumed_at", null: false
+    t.datetime "created_at", null: false
+    t.integer "quantity", default: 1, null: false
+    t.datetime "updated_at", null: false
+    t.index ["beverage_id"], name: "index_caffeine_intakes_on_beverage_id"
+    t.index ["consumed_at"], name: "index_caffeine_intakes_on_consumed_at"
+  end
+
+  add_foreign_key "caffeine_intakes", "beverages"
 end
