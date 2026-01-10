@@ -25,6 +25,7 @@ services:
       DB_NAME: caffeine_development
       DB_USER: root
       DB_PASS: root
+      TAILWINDCSS_POLLING: true
     depends_on:
       - db
 
