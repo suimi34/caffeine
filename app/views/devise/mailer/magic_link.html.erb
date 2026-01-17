@@ -1,0 +1,9 @@
+<p>こんにちは、<%= @resource.email %> さん</p>
+
+<p>以下のリンクをクリックしてログインしてください：</p>
+
+<p><%= link_to "ログインする", magic_link_url(@resource, @scope_name => {email: @resource.email, token: @token, remember_me: @remember_me}) %></p>
+
+<p>このリンクは20分間有効です。</p>
+
+<p>このメールに心当たりがない場合は、無視してください。</p>
