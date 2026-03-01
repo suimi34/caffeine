@@ -31,6 +31,7 @@ ENV LANG=C.UTF-8 \
 COPY Gemfile Gemfile.lock ./
 RUN gem install bundler && \
   bundle install && \
+  gem install foreman && \
   rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache
 
 # Copy application code
@@ -39,7 +40,8 @@ COPY . .
 # Create non-root user for security (optional for dev)
 RUN groupadd --system --gid 1000 rails && \
   useradd rails --uid 1000 --gid 1000 --create-home --shell /bin/bash && \
-  chown -R rails:rails /rails
+  chown -R rails:rails /rails && \
+  chown -R rails:rails /usr/local/bundle
 USER rails
 
 EXPOSE 3000
